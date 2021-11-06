@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
   <title>API</title>
 </head>
+
 <body>
- <form id='form' method='post'>
+  <form id='form' method='post'>
     <input type='number' id='input' />
     <input type='submit' value='Save' />
   </form>
@@ -16,6 +18,7 @@
   form.addEventListener('submit', function (e) {
     e.preventDefault;
     var input = document.getElementById('input').value
+    console.log(input)
     fetch('http://127.0.0.1:5000/home', {
         method: "POST",
         body: JSON.stringify({
@@ -25,12 +28,13 @@
           'Content-Type': 'application/json;',
         },
       })
-      .then(function (response) {
-        return response.json()
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
       })
-      .then(function (data) {
-        console.log(data)
-      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   })
 </script>
 
