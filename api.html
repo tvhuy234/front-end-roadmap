@@ -1,25 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-
   <title>API</title>
-
 </head>
-
 <body>
-  <p id='api'>API</p>
-  <button id="load">Load</button>
-
-  <button id="save">Save</button>
-
-  <input type="number" id="saveServer">
-
+ <form id='form' method='post'>
+    <input type='number' id='input' />
+    <input type='submit' value='Save' />
+  </form>
 </body>
-<script src="js/example.js">
-
+<script>
+  var form = document.getElementById('form')
+  form.addEventListener('submit', function (e) {
+    e.preventDefault;
+    var input = document.getElementById('input').value
+    fetch('http://127.0.0.1:5000/home', {
+        method: "POST",
+        body: JSON.stringify({
+          body: input,
+        }),
+        headers: {
+          'Content-Type': 'application/json;',
+        },
+      })
+      .then(function (response) {
+        return response.json()
+      })
+      .then(function (data) {
+        console.log(data)
+      })
+  })
 </script>
 
 </html>
